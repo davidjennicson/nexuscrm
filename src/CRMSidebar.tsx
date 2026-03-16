@@ -163,13 +163,8 @@ export function CRMSidebar({ isMobile = false }: { isMobile?: boolean }) {
                     }}
                   />
                 )}
-                {/* <item.icon className="relative z-10 w-4 h-4 shrink-0" /> */}
-                {/* {!collapsed && <span className="relative z-10 whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</span>}
-                {!collapsed && item.title === "Messages" && (
-                  <span className="relative z-10 ml-auto w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-semibold flex items-center justify-center shrink-0">
-                    3
-                  </span>
-                )} */}
+                <item.icon className="relative z-10 w-4 h-4 shrink-0" />
+                {!collapsed && <span className="relative z-10 whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</span>}
               </motion.button>
             );
           })}
