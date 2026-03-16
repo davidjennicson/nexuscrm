@@ -4,7 +4,7 @@ import {
   LayoutDashboard,
   Users,
   Kanban,
-  MessageSquare,
+
   Settings,
   Search,
   Workflow,
