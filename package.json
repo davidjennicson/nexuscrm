@@ -18,6 +18,8 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource/anton": "^5.2.7",
+    "@fontsource/source-serif-4": "^5.2.9",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-query": "^5.90.21",
     "@tanstack/react-table": "^8.21.3",

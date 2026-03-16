@@ -1,248 +1,452 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
-  BarChart3, 
-  UsersRound, 
-  Kanban, 
-  ArrowRight, 
-  ShieldCheck, 
-  Zap, 
-  Globe 
-} from "lucide-react";
+import { ArrowRight, Users, TrendingUp, FileText, Building2, BarChart3, Lock, Zap } from "lucide-react";
+import "@fontsource/anton";
+import "@fontsource/source-serif-4";
+import "@fontsource-variable/inter";
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
+interface LandingProps {
+  isDark: boolean;
+}
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
     opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
+  })
 };
 
-export default function App() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDark]);
-
+export default function Landing({ isDark }: LandingProps) {
   return (
-    <div className={`min-h-screen bg-background text-foreground transition-colors duration-300 ${isDark ? 'dark' : ''}`}>
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
-              C
-            </div>
-            <span className="font-bold text-xl tracking-tight">CRM.io</span>
-          </div>
-          
-          <div className="flex items-center gap-6">
-            <button 
-              onClick={() => setIsDark(!isDark)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {isDark ? 'Light Mode' : 'Dark Mode'}
-            </button>
-            <button className="px-5 py-2.5 rounded-xl bg-foreground text-background font-medium hover:opacity-90 transition-opacity text-sm">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[100px] -z-10" />
-        
-        <div className="max-w-[1000px] mx-auto text-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Open Source Enterprise CRM
-            </motion.div>
-            
-            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
-              Built with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#61DAFB] to-[#47A248]">React & Spring Boot</span>. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ff8c00]">
-                Loved by developers.
-              </span>
-            </motion.h1>
-            
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              A premium, completely open-source CRM built for modern teams. Streamline your sales pipeline, manage contacts, and customize it infinitely.
-            </motion.p>
-            
-            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="px-8 py-4 w-full sm:w-auto rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:shadow-xl hover:shadow-primary/25 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
-                <span>View on GitHub</span>
-              </button>
-              <button className="px-8 py-4 w-full sm:w-auto rounded-2xl bg-secondary text-secondary-foreground font-bold text-lg hover:bg-secondary/80 transition-all flex items-center justify-center gap-2">
-                Live Demo <ArrowRight className="w-5 h-5" />
-              </button>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Hero Image Mockup (Abstracted) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="max-w-[1000px] mx-auto mt-20 relative"
+    <div className={`min-h-screen ${isDark ? "dark" : ""}`}>
+      {/* ===== HERO SECTION ===== */}
+      <section className="min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-12">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial="hidden"
+          animate="visible"
         >
-          <div className="rounded-3xl border border-border bg-card/50 backdrop-blur-xl p-2 shadow-2xl relative z-10 overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
-            <div className="rounded-2xl bg-background border border-border p-8 aspect-[16/9] flex flex-col">
-              {/* Fake UI */}
-              <div className="flex items-center justify-between mb-8 border-b border-border pb-4">
-                <div className="flex gap-4">
-                  <div className="w-24 h-8 bg-muted rounded-lg" />
-                  <div className="w-16 h-8 bg-muted rounded-lg" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">JD</div>
+          {/* Badge */}
+          <motion.div
+            custom={0}
+            variants={fadeInUp}
+            className="inline-block mb-8"
+          >
+            <div
+              className="px-4 py-2 rounded-full text-sm font-semibold tracking-widest"
+              style={{
+                color: "var(--primary)",
+                backgroundColor: isDark ? "rgba(255, 75, 50, 0.1)" : "rgba(209, 0, 1, 0.1)"
+              }}
+            >
+              OPEN SOURCE CRM
+            </div>
+          </motion.div>
+
+          {/* Main Heading */}
+          <motion.h1
+            custom={1}
+            variants={fadeInUp}
+            className="mb-8"
+            style={{
+              fontFamily: "Anton, sans-serif",
+              fontSize: "clamp(3rem, 12vw, 5.5rem)",
+              color: "var(--foreground)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              textTransform: "uppercase"
+            }}
+          >
+            From First Customer <br />
+            to{" "}
+            <span style={{ color: "var(--primary)" }}>
+              THOUSANDTH.
+            </span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p
+            custom={2}
+            variants={fadeInUp}
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-12"
+            style={{
+              color: "var(--muted-foreground)",
+              lineHeight: 1.7
+            }}
+          >
+            One platform. Every scale. No complexity, no vendor lock-in. Built for businesses that refuse to compromise.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            custom={3}
+            variants={fadeInUp}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.button
+              className="px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2"
+              style={{
+                backgroundColor: "var(--primary)",
+                color: "var(--primary-foreground)"
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Building Free
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
+
+            <motion.button
+              className="px-8 py-4 rounded-2xl font-bold text-base border-2"
+              style={{
+                borderColor: "var(--border)",
+                color: "var(--foreground)"
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View on GitHub
+            </motion.button>
+          </motion.div>
+        </motion.div>
+
+        {/* Dashboard preview - positioned lower */}
+        <motion.div
+          className="w-full max-w-5xl mx-auto mt-20"
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <div
+            className="rounded-2xl overflow-hidden border shadow-2xl"
+            style={{
+              backgroundColor: "var(--background)",
+              borderColor: "var(--border)"
+            }}
+          >
+            {/* Mock dashboard header */}
+            <div
+              className="px-6 py-4 border-b flex items-center justify-between"
+              style={{
+                backgroundColor: isDark ? "rgba(255, 75, 50, 0.05)" : "rgba(209, 0, 1, 0.05)",
+                borderColor: "var(--border)"
+              }}
+            >
+              <div className="text-sm font-bold">Note: This is a frontend-only version. The backend is being deployed soon! Until then, see the project on GitHub.</div>
+              <button className="px-4 py-1.5 rounded-lg font-semibold text-sm" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
+                Refresh
+              </button>
+            </div>
+
+            {/* Mock dashboard content */}
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-red-100" />
+                <h2 className="text-2xl font-bold">Dashboard</h2>
               </div>
-              <div className="grid grid-cols-4 gap-4 flex-1">
-                <div className="col-span-1 border-r border-border pr-4 space-y-4">
-                  <div className="w-full h-8 bg-muted/50 rounded-lg" />
-                  <div className="w-full h-8 bg-muted/50 rounded-lg" />
-                  <div className="w-2/3 h-8 bg-muted/50 rounded-lg" />
-                </div>
-                <div className="col-span-3 grid grid-cols-3 gap-6">
-                  {/* Kanban Columns */}
-                  <div className="bg-muted/30 rounded-xl p-4">
-                    <div className="w-20 h-4 bg-muted mb-4 rounded" />
-                    <div className="w-full h-24 bg-card border border-border rounded-xl mb-3 shadow-sm" />
-                    <div className="w-full h-24 bg-card border border-border rounded-xl shadow-sm" />
-                  </div>
-                  <div className="bg-muted/30 rounded-xl p-4">
-                    <div className="w-20 h-4 bg-primary/50 mb-4 rounded" />
-                    <div className="w-full h-24 bg-card border border-primary/20 rounded-xl mb-3 shadow-sm relative overflow-hidden">
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
+              <div className="text-sm text-gray-500 mb-6">Latest updated: 16 March 2026</div>
+
+              {/* Mock stats grid */}
+              <div className="grid grid-cols-4 gap-4">
+                {["1 new", "open in pipeline", "$270K pipeline", "2 won"].map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-lg"
+                    style={{ backgroundColor: isDark ? "rgba(255, 75, 50, 0.05)" : "rgba(209, 0, 1, 0.05)" }}
+                  >
+                    <div className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+                      {stat}
                     </div>
                   </div>
-                  <div className="bg-muted/30 rounded-xl p-4">
-                    <div className="w-20 h-4 bg-success/50 mb-4 rounded" />
-                    <div className="w-full h-24 bg-card border border-border rounded-xl shadow-sm" />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 px-6 bg-muted/30 border-y border-border">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Everything you need to win</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Powerful features packaged in an impossibly beautiful, lightning-fast interface.
+      {/* ===== FEATURES SECTION ===== */}
+      <section className="py-20 px-6 border-t" style={{ borderColor: "var(--border)" }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-5xl font-bold mb-4"
+              style={{ color: "var(--foreground)" }}
+            >
+              Everything you need.
+            </h2>
+            <p
+              className="text-lg max-w-2xl"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              Built for teams who prioritize clarity over clutter. Every feature earns its place.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<UsersRound className="w-6 h-6 text-primary" />}
-              title="Intelligent Contacts"
-              desc="Manage thousands of relationships without breaking a sweat. Automatic enrichment and intuitive grouping."
-            />
-            <FeatureCard 
-              icon={<Kanban className="w-6 h-6 text-primary" />}
-              title="Visual Pipelines"
-              desc="Drag, drop, and close. See your entire sales funnel at a glance and identify bottlenecks instantly."
-            />
-            <FeatureCard 
-              icon={<BarChart3 className="w-6 h-6 text-primary" />}
-              title="Deep Analytics"
-              desc="Actionable insights delivered in real-time. Know exactly where your revenue is coming from."
-            />
-            <FeatureCard 
-              icon={<Zap className="w-6 h-6 text-primary" />}
-              title="Lightning Fast"
-              desc="Built on modern web technologies. No loading spinners, no waiting. It just works, instantly."
-            />
-            <FeatureCard 
-              icon={<ShieldCheck className="w-6 h-6 text-primary" />}
-              title="Enterprise Security"
-              desc="Bank-grade encryption, role-based access control, and comprehensive audit logs."
-            />
-            <FeatureCard 
-              icon={<Globe className="w-6 h-6 text-primary" />}
-              title="Work Anywhere"
-              desc="Fully responsive design. Your entire CRM is in your pocket, on your tablet, or on your desktop."
-            />
-          </div>
-        </div>
-      </section>
+          {/* Features grid */}
+          <div className="space-y-6">
+            {/* Full width feature */}
+            <motion.div
+              className="p-8 rounded-2xl border"
+              style={{
+                backgroundColor: "var(--card)",
+                borderColor: "var(--border)"
+              }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-start gap-4">
+                <div
+                  className="p-3 rounded-xl flex-shrink-0"
+                  style={{
+                    backgroundColor: isDark ? "rgba(255, 75, 50, 0.1)" : "rgba(209, 0, 1, 0.1)"
+                  }}
+                >
+                  <Users className="w-6 h-6" style={{ color: "var(--primary)" }} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Contact Management</h3>
+                  <p style={{ color: "var(--muted-foreground)" }}>
+                    Track all customer interactions in one place. Full history, notes, and activity timeline.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
 
-      {/* CTA Section */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5" />
-        <div className="max-w-[800px] mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Ready to self-host?</h2>
-          <p className="text-xl text-muted-foreground mb-10">
-            Clone the repository and deploy your own instance of CRM.io in minutes.
-          </p>
-          <button className="px-10 py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-xl hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 transition-all">
-            Get the Source Code
-          </button>
-          <p className="mt-6 text-sm text-muted-foreground">100% Free and Open Source. MIT Licensed.</p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-10 px-6 border-t border-border bg-card">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs">
-              C
+            {/* 3 column grid */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: BarChart3, title: "Deal Pipeline", desc: "Visualize sales with Kanban boards, tables, and graphs. Drag-and-drop simplicity." },
+                { icon: FileText, title: "Task Management", desc: "Create, assign, and track tasks with priorities, due dates, and team assignments." },
+                { icon: Building2, title: "Company Profiles", desc: "Organize and manage company relationships with hierarchies and custom fields." }
+              ].map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  className="p-6 rounded-2xl border"
+                  style={{
+                    backgroundColor: "var(--card)",
+                    borderColor: "var(--border)"
+                  }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div
+                    className="p-3 rounded-xl w-fit mb-4"
+                    style={{
+                      backgroundColor: isDark ? "rgba(255, 75, 50, 0.1)" : "rgba(209, 0, 1, 0.1)"
+                    }}
+                  >
+                    <feature.icon className="w-5 h-5" style={{ color: "var(--primary)" }} />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                  <p style={{ color: "var(--muted-foreground)" }}>{feature.desc}</p>
+                </motion.div>
+              ))}
             </div>
-            <span className="font-bold tracking-tight">CRM.io</span>
+
+            {/* More features */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { icon: Lock, title: "Enterprise Security", desc: "Bank-grade encryption, role-based access control, and comprehensive audit logs." },
+                { icon: Zap, title: "Lightning Fast", desc: "Built on modern tech stack. No loading spinners, no waiting. It just works." }
+              ].map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  className="p-6 rounded-2xl border"
+                  style={{
+                    backgroundColor: "var(--card)",
+                    borderColor: "var(--border)"
+                  }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div
+                    className="p-3 rounded-xl w-fit mb-4"
+                    style={{
+                      backgroundColor: isDark ? "rgba(255, 75, 50, 0.1)" : "rgba(209, 0, 1, 0.1)"
+                    }}
+                  >
+                    <feature.icon className="w-5 h-5" style={{ color: "var(--primary)" }} />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                  <p style={{ color: "var(--muted-foreground)" }}>{feature.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} CRM.io. All rights reserved.
+        </div>
+      </section>
+
+      {/* ===== ROADMAP SECTION ===== */}
+      <section className="py-20 px-6 border-t" style={{ borderColor: "var(--border)" }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-sm font-bold mb-4" style={{ color: "var(--primary)" }}>
+              ROADMAP
+            </div>
+            <h2
+              className="text-5xl font-bold mb-4"
+              style={{ color: "var(--foreground)" }}
+            >
+              What's coming next.
+            </h2>
+            <p
+              className="text-lg"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              We're building in public. Here's the trajectory.
+            </p>
+          </motion.div>
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-1"
+              style={{ backgroundColor: "var(--border)" }}
+            />
+
+            <div className="space-y-12">
+              {/* Phase 2 */}
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="md:w-1/2 pr-8">
+                  <div className="p-6 rounded-2xl border" style={{ backgroundColor: "var(--card)", borderColor: "var(--border)" }}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-6 h-6 rounded-lg p-1 flex items-center justify-center" style={{ backgroundColor: "var(--primary)" }}>
+                        <span style={{ color: "var(--primary-foreground)", fontSize: "10px" }}>📦</span>
+                      </div>
+                      <span className="text-xs font-bold" style={{ color: "var(--primary)" }}>PHASE 2</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4">ERP Capabilities</h3>
+                    <ul className="space-y-2">
+                      {["Inventory management", "Purchase orders & procurement", "Financial tracking and reporting", "Multi-warehouse support"].map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2" style={{ color: "var(--muted-foreground)" }}>
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--primary)" }} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                {/* Timeline dot */}
+                <div className="absolute left-1/2 top-8 -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: "var(--primary)" }} />
+                </div>
+              </motion.div>
+
+              {/* Phase 3 */}
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="md:w-1/2 md:ml-auto md:pl-8">
+                  <div className="p-6 rounded-2xl border" style={{ backgroundColor: "var(--card)", borderColor: "var(--border)" }}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-6 h-6 rounded-lg p-1 flex items-center justify-center" style={{ backgroundColor: "var(--primary)" }}>
+                        <span style={{ color: "var(--primary-foreground)", fontSize: "10px" }}>🚀</span>
+                      </div>
+                      <span className="text-xs font-bold" style={{ color: "var(--primary)" }}>PHASE 3</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4">Advanced Features</h3>
+                    <ul className="space-y-2">
+                      {["Custom workflows and automation rules", "Advanced reporting and business intelligence", "API-first architecture for integrations", "Mobile app (native)", "Multi-language support"].map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2" style={{ color: "var(--muted-foreground)" }}>
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--primary)" }} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                {/* Timeline dot */}
+                <div className="absolute left-1/2 top-8 -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: "var(--primary)" }} />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CTA SECTION ===== */}
+      <section className="py-20 px-6 border-t" style={{ borderColor: "var(--border)" }}>
+        <motion.div
+          className="max-w-3xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: "var(--foreground)" }}>
+            Ready to build?
+          </h2>
+          <p className="text-lg mb-8" style={{ color: "var(--muted-foreground)" }}>
+            Start building with Nexus CRM today. It's completely free and open source.
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground font-medium">
-            <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
-            <a href="#" className="hover:text-foreground transition-colors">GitHub</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+          <motion.button
+            className="px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 mx-auto"
+            style={{
+              backgroundColor: "var(--primary)",
+              color: "var(--primary-foreground)"
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get Started
+            <ArrowRight className="w-5 h-5" />
+          </motion.button>
+        </motion.div>
+      </section>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="py-12 px-6 border-t" style={{ borderColor: "var(--border)" }}>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-lg">Nexus</span>
+            <span className="font-bold text-lg" style={{ color: "var(--primary)" }}>CRM</span>
+          </div>
+          <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+            © {new Date().getFullYear()} Nexus CRM. All rights reserved.
+          </p>
+          <div className="flex gap-6 text-sm">
+            <a href="#" style={{ color: "var(--muted-foreground)" }} className="hover:opacity-70">GitHub</a>
+            <a href="#" style={{ color: "var(--muted-foreground)" }} className="hover:opacity-70">Docs</a>
+            <a href="#" style={{ color: "var(--muted-foreground)" }} className="hover:opacity-70">Contact</a>
           </div>
         </div>
       </footer>
     </div>
-  );
-}
-
-function FeatureCard({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
-  return (
-    <motion.div 
-      whileHover={{ y: -5 }}
-      className="p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-xl transition-all duration-300"
-    >
-      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{desc}</p>
-    </motion.div>
   );
 }
