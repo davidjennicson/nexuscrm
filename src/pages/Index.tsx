@@ -19,7 +19,6 @@ import {
   type LeadDto,
   type TaskDto,
 } from "@/lib/api";
-import { useAuth } from "@/context/AuthContext";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -64,7 +63,6 @@ function formatDueDate(dateStr?: string): string {
 }
 
 const Dashboard = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [analytics, setAnalytics] = useState<AnalyticsDto | null>(null);
   const [recentLeads, setRecentLeads] = useState<LeadDto[]>([]);
@@ -78,8 +76,8 @@ const Dashboard = () => {
     try {
       const [analyticsData, leadsPage, tasks] = await Promise.all([
         analyticsApi.getDashboard(),
-        leadsApi.getAll(0, 5, "createdAt,desc"),
-        tasksApi.getDashboard(10),
+        leadsApi.getAll(),
+        tasksApi.getDashboard(),
       ]);
       setAnalytics(analyticsData);
       setRecentLeads(leadsPage.content ?? []);
@@ -94,8 +92,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchAll();
   }, []);
-
-  const displayName = user?.name ? user.name.split(" ")[0] : "there";
 
   const metrics = analytics
     ? [

@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, Play, Pause, Trash2, Zap, Clock, GitBranch, Sparkles, Mail, MousePointer, GripVertical, X } from "lucide-react";
+import { Plus, Play, Pause, Trash2, Zap, Clock, GitBranch, Sparkles, Mail, X } from "lucide-react";
 import { AppLayout } from "@/AppLayout";
 import type { WorkflowNode, WorkflowConnection, Workflow } from "@/types/crm";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";

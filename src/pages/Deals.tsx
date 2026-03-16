@@ -51,8 +51,8 @@ const Deals = () => {
     setError(null);
     try {
       const page = teamId
-        ? await leadsApi.getForTeam(teamId, 0, 100)
-        : await leadsApi.getAll(0, 100);
+        ? await leadsApi.getForTeam()
+        : await leadsApi.getAll();
       setLeads(page.content ?? []);
       setDeals((page.content ?? []).map(leadToUIDeal));
     } catch (err: unknown) {
@@ -67,7 +67,7 @@ const Deals = () => {
   }, [fetchLeads]);
 
   useEffect(() => {
-    teamsApi.getAll(0, 50).then((p) => setTeams(p.content ?? []));
+    teamsApi.getAll().then((p) => setTeams(p.content ?? []));
   }, []);
 
   useEffect(() => {

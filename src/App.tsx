@@ -1,9 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, TrendingUp, FileText, Building2, BarChart3, Lock, Zap } from "lucide-react";
-import "@fontsource/anton";
-import "@fontsource/source-serif-4";
-import "@fontsource-variable/inter";
+import { ArrowRight, Users, FileText, Building2, BarChart3, Lock, Zap } from "lucide-react";
 
 interface LandingProps {
   isDark: boolean;
@@ -14,7 +10,7 @@ const fadeInUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
+    transition: { delay: i * 0.1, duration: 0.6 }
   })
 };
 

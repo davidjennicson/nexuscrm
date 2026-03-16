@@ -26,7 +26,7 @@ export function ContactFormDialog({
 
   useEffect(() => {
     if (open) {
-      companiesApi.getAll(0, 50).then((page) => setCompanies(page.content));
+      companiesApi.getAll().then((page) => setCompanies(page.content));
       setForm(
         editing
           ? { ...editing }

@@ -15,7 +15,6 @@ import { motion } from "framer-motion";
 import { AppLayout } from "@/AppLayout";
 import { contactsApi, type ContactDto } from "@/lib/api";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
 import { DataTable } from "@/components/ui/data-table";
 import { ImportWizard } from "@/components/ImportWizard";
 import { ContactFormDialog } from "@/components/contacts/ContactFormDialog";
@@ -30,7 +29,7 @@ const Contacts = () => {
   const [contacts, setContacts] = useState<ContactDto[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingContact, setEditingContact] = useState<ContactDto | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -47,12 +46,9 @@ const Contacts = () => {
     try {
       let page;
       if (filterStatus !== "ALL" || filterCompany.trim()) {
-        page = await contactsApi.filter({
-          status: filterStatus === "ALL" ? undefined : filterStatus,
-          company: filterCompany.trim() || undefined
-        }, 0, 100);
+        page = await contactsApi.filter();
       } else {
-        page = await contactsApi.getAll(0, 100);
+        page = await contactsApi.getAll();
       }
       setContacts(page.content);
     } catch (err: unknown) {

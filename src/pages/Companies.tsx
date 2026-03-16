@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState, useCallback } from "react";
 import {
   Plus,
@@ -26,7 +25,7 @@ export default function Companies() {
   const fetchCompanies = useCallback(async () => {
     setIsLoading(true);
     try {
-      const page = await companiesApi.getAll(0, 100);
+      const page = await companiesApi.getAll();
       setCompanies(page.content);
     } catch {
       toast.error("Failed to load companies");

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/AppLayout";
-import { Plus, RefreshCw, UsersRound, ExternalLink, Trash2, User } from "lucide-react";
+import { Plus, RefreshCw, UsersRound, ExternalLink, User } from "lucide-react";
 import { teamsApi, type TeamDto } from "@/lib/api";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ export default function Teams() {
   const fetchTeams = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await teamsApi.getAll(page, 20);
+      const res = await teamsApi.getAll();
       setTeams(res.content ?? []);
       setTotalPages(res.totalPages ?? 0);
     } catch {

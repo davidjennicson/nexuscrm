@@ -1,9 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, TrendingUp, FileText, Building2, BarChart3, Lock, Zap, Sun, Moon } from "lucide-react";
-import "@fontsource/anton";
-import "@fontsource/source-serif-4";
-import "@fontsource-variable/inter";
+import { ArrowRight, Users, FileText, Building2, BarChart3, Lock, Zap, Sun, Moon } from "lucide-react";
 
 interface LandingProps {
   isDark: boolean;
@@ -11,31 +7,22 @@ interface LandingProps {
   onThemeToggle?: () => void;
 }
 
+const frontend = ["React 19 + TypeScript", "Vite", "Tailwind CSS + shadcn/ui", "React Router & React Query", "Recharts", "Framer Motion"];
+const backend = ["Spring Boot + Spring Security", "PostgreSQL", "RESTful API Architecture"];
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
+    transition: { delay: i * 0.1, duration: 0.6 }
   })
-};
-
-const frontend = ["React 19 + TypeScript", "Vite", "Tailwind CSS + shadcn/ui", "React Router & React Query", "Recharts", "Framer Motion"];
-const backend = ["Spring Boot + Spring Security", "PostgreSQL", "RESTful API Architecture"];
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
 };
 
 const floatAnimation = {
   animate: {
     y: [0, -15, 0],
-    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+    transition: { duration: 4, repeat: Infinity }
   }
 };
 

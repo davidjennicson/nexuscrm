@@ -57,7 +57,7 @@ export default function Tasks() {
   const fetchTasks = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await tasksApi.getVisible(page, 20);
+      const res = await tasksApi.getVisible();
       setTasks(res.content ?? []);
       setTotalPages(res.totalPages ?? 0);
     } catch (e) {
@@ -73,8 +73,8 @@ export default function Tasks() {
 
   useEffect(() => {
     if (formOpen) {
-      teamsApi.getAll(0, 50).then((p) => setTeams(p.content ?? []));
-      leadsApi.getAll(0, 100).then((p) => setLeads(p.content ?? []));
+      teamsApi.getAll().then((p) => setTeams(p.content ?? []));
+      leadsApi.getAll().then((p) => setLeads(p.content ?? []));
     }
   }, [formOpen]);
 
