@@ -35,7 +35,7 @@ const navItems = [
   { title: "Teams", url: "/teams", icon: UsersRound },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Workflows", url: "/workflows", icon: Workflow },
-  { title: "Messages", url: "/messages", icon: MessageSquare },
+  // { title: "Messages", url: "/messages", icon: MessageSquare },
 ];
 
 const bottomItems = [
@@ -163,13 +163,13 @@ export function CRMSidebar({ isMobile = false }: { isMobile?: boolean }) {
                     }}
                   />
                 )}
-                <item.icon className="relative z-10 w-4 h-4 shrink-0" />
-                {!collapsed && <span className="relative z-10 whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</span>}
+                {/* <item.icon className="relative z-10 w-4 h-4 shrink-0" /> */}
+                {/* {!collapsed && <span className="relative z-10 whitespace-nowrap overflow-hidden text-ellipsis">{item.title}</span>}
                 {!collapsed && item.title === "Messages" && (
                   <span className="relative z-10 ml-auto w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-semibold flex items-center justify-center shrink-0">
                     3
                   </span>
-                )}
+                )} */}
               </motion.button>
             );
           })}
@@ -272,11 +272,11 @@ export function CRMSidebar({ isMobile = false }: { isMobile?: boolean }) {
                     <User className="w-4 h-4 flex-shrink-0" />
                     <span>Profile</span>
                   </button>
-
+{/* 
                   <button className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                     <Settings className="w-4 h-4 flex-shrink-0" />
                     <span>Settings</span>
-                  </button>
+                  </button> */}
 
                   <button className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                     <HelpCircle className="w-4 h-4 flex-shrink-0" />
